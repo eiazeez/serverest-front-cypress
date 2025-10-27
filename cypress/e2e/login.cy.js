@@ -13,7 +13,15 @@ describe('Dado que estou na página de login', () => {
 
     it('Então deve ser possível visualizar a Home', () => {
 
-      const user = { email: 'teste-douglas-qa@qa.com', password: 'isd123'}
+      const user = {
+        name: 'Douglas QA',
+        email: 'teste-douglas-qa@qa.com',
+        password: 'isd123',
+        administrator: 'false'
+      }
+
+      cy.deleteUserByEmail(user.email)
+      cy.postUser(user)
 
       Access.go()
       Access.fillLoginForm(user)
