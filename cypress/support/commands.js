@@ -23,3 +23,44 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getUserByEmail', (email) => { 
+    cy.api({
+        url: 'https://serverest.dev/usuarios',
+        method: 'GET',
+    }).then(response => {
+        const users = response.body.usuarios || response.body
+        expect(Array.isArray(users)).to.be.true
+
+        const user = users.find(u => u.email === email)
+        return user
+    })
+})
+
+Cypress.Commands.add('deleteUserByEmail', (email) => {
+    cy.getUserByEmail(email).then(user => {
+        expect(user).to.not.be.undefined
+        const userId = user._id
+
+        cy.api({
+            url: `https://serverest.dev/usuarios/${userId}`,
+            method: 'DELETE'
+        })
+    })
+})
+
+Cypress.Commands.add('postUser', (user) => { 
+    cy.api({
+        url: 'https://serverest.dev/usuarios',
+        method: 'POST',
+        body: {
+              "nome": user.name,
+              "email": user.email,
+              "password": user.password,
+              "administrador": user.administrator
+            }
+      })
+})
+
+
+
