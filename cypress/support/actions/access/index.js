@@ -29,7 +29,15 @@ export const Access = {
 
     submitLoginForm: function() {
 
-         cy.get('button[type="submit"]').click()
+        cy.get('button[type="submit"]').click()
+
+    },
+
+    outputShouldBe: function(text) {
+
+        cy.get('#email')
+            .invoke('prop', 'validationMessage')
+            .should('to.contain', text)
 
     }
 

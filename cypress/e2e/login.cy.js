@@ -11,7 +11,7 @@ describe('Dado que estou na página de login', () => {
 
   context('Quando preencho o formulário com dados válidos', () => {
 
-    it('Então deve ser possível visualizar a Home', () => {
+    it('Então deve ser possível realizar LOGIN como Usuário', () => {
 
       const user = {
         name: 'Douglas QA',
@@ -31,9 +31,31 @@ describe('Dado que estou na página de login', () => {
 
     })
 
+    it('Então deve ser possível realizar LOGIN como Adminisrtador', () => {
+
+      const user = {
+        name: 'Douglas QA Admin',
+        email: 'teste-douglas-admin@admin.com',
+        password: 'isd123',
+        administrator: 'true'
+      }
+
+      cy.deleteUserByEmail(user.email)
+      cy.postUser(user)
+
+      Access.go()
+      Access.fillLoginForm(user)
+      Access.submitLoginForm()
+
+      cy.get('h1').should('to.contain', 'Bem Vindo')
+      cy.get('h1').should('to.contain', user.name)
+
+    })
+
   })
 
   context('Quando preencho o formulário de forma inválida', () => {
+
     it('Então não deve ser possível logar sem preencher os dados', () => {
 
       Access.go()
@@ -58,7 +80,7 @@ describe('Dado que estou na página de login', () => {
 
     })
 
-    it('Então não deve ser possível logar com dados inválidos', () => {
+    it('Então não deve ser possível logar usuário não cadastrado', () => {
 
       const user = { email: 'emailDeTeste@email.com', password: 'SENHABEMALEATORIA' }
 
@@ -67,6 +89,17 @@ describe('Dado que estou na página de login', () => {
       Access.submitLoginForm()
      
       Notification.shouldHaveTxt('Email e/ou senha inválidos')
+    })
+
+    it('Então não deve ser possível logar com email inválido', () => {
+
+      const user = { email: 'emailDeTesteemail.com', password: 'SENHABEMALEATORIA' }
+
+      Access.go()
+      Access.fillLoginForm(user)
+      Access.submitLoginForm()
+      Access.outputShouldBe('Inclua um "@" no endereço de e-mail.')
+
     })
   })
 
