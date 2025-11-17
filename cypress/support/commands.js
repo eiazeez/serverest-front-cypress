@@ -26,7 +26,7 @@
 
 Cypress.Commands.add('getUserByEmail', (email) => { 
     cy.api({
-        url: 'https://serverest.dev/usuarios',
+        url: `${Cypress.env('apiUrl')}/usuarios`,
         method: 'GET',
     }).then(response => {
         const users = response.body.usuarios || response.body
@@ -43,7 +43,7 @@ Cypress.Commands.add('deleteUserByEmail', (email) => {
         const userId = user._id
 
         cy.api({
-            url: `https://serverest.dev/usuarios/${userId}`,
+            url: `${Cypress.env('apiUrl')}/usuarios/${userId}`,
             method: 'DELETE'
         })
     })
@@ -51,7 +51,7 @@ Cypress.Commands.add('deleteUserByEmail', (email) => {
 
 Cypress.Commands.add('postUser', (user) => { 
     cy.api({
-        url: 'https://serverest.dev/usuarios',
+        url: `${Cypress.env('apiUrl')}/usuarios`,
         method: 'POST',
         body: {
               "nome": user.name,
