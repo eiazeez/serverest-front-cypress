@@ -103,14 +103,13 @@ describe('Dado que estou na página de login', () => {
     })
   })
 
-  context('Quando clico no âncora Cadastre-se', () => {
+  context('Quando clico na âncora Cadastre-se', () => {
 
     it('Então deve ser possível visualizar o formulário de cadastro', () => {
 
       Access.go()
 
       cy.get('a[data-testid="cadastrar"]').click()
-
       cy.get('.form').should('be.visible')
 
     })
