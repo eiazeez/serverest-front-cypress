@@ -3,7 +3,12 @@
 export const Access = {
 
     go: function () {
-        cy.visit('https://front.serverest.dev/login')
+        cy.visit('/login')
+        cy.get('form[class=form]').should('be.visible')
+    },
+
+    signupGo: function() {
+        cy.visit('/cadastrarusuarios')
         cy.get('form[class=form]').should('be.visible')
     },
 
@@ -14,6 +19,18 @@ export const Access = {
 
         cy.get('#password')
             .type(user.password)
+
+    },
+
+    fillSignupForm: function (user) {
+
+        if( user.name )                        cy.get('#nome').type(user.name)
+
+        if( user.email )                       cy.get('#email').type(user.email)
+
+        if( user.password )                    cy.get('#password').type(user.password)
+            
+        if( user.administrator === "true" )    cy.get('#administrador').click()
 
     },
 
