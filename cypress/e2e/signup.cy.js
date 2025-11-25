@@ -1,4 +1,7 @@
 import { Access } from "../support/actions/access"
+import { Home } from "../support/actions/home"
+import { Notification } from "../support/actions/components/notification"
+import { Admin } from "../support/actions/admin"
 
 describe('Dado que estou na página de cadastro', function() {
 
@@ -10,7 +13,7 @@ describe('Dado que estou na página de cadastro', function() {
 
    context('Quando preencho o formulário com dados válidos', () => {
 
-    it.only('Então deve ser possível realizar CADASTRO como Usuário', () => {
+    it('Então deve ser possível realizar CADASTRO como Usuário', () => {
 
       const user = {
         name: 'LeBron James',
@@ -23,30 +26,32 @@ describe('Dado que estou na página de cadastro', function() {
 
       Access.signupGo()
       Access.fillSignupForm(user)
-   
+      Access.submitSignupForm()
 
-      // cy.get('section[class="row espacamento"]').should('be.visible')
+      Notification.successfulSignupShouldHaveTxt('Cadastro realizado com sucesso')
+    
+      Home.shouldBeVisible()
 
     })
 
-    it('Então deve ser possível realizar CADASTRO como Adminisrtador', () => {
+    it.only('Então deve ser possível realizar CADASTRO como Adminisrtador', () => {
 
       const user = {
-        name: 'Douglas QA Admin',
-        email: 'teste-douglas-admin@admin.com',
+        name: 'Stephen Curry',
+        email: 'steph-curry-admin@qa.com',
         password: 'isd123',
         administrator: 'true'
       }
 
       cy.deleteUserByEmail(user.email)
-      cy.postUser(user)
 
-      Access.go()
-      Access.fillLoginForm(user)
-      Access.submitLoginForm()
+      Access.signupGo()
+      Access.fillSignupForm(user)
+      Access.submitSignupForm()
 
-      cy.get('h1').should('to.contain', 'Bem Vindo')
-      cy.get('h1').should('to.contain', user.name)
+      Notification.successfulSignupShouldHaveTxt('Cadastro realizado com sucesso')
+    
+      Admin.welcomeShouldBe('Bem Vindo', user.name)
 
     })
 

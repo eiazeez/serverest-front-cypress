@@ -50,6 +50,10 @@ export const Access = {
 
     },
 
+    submitSignupForm: function() {
+        cy.get('button[data-testid="cadastrar"]').click()
+    },
+
     outputShouldBe: function(text) {
 
         cy.get('#email')

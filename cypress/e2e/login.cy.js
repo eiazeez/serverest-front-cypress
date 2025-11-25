@@ -1,5 +1,7 @@
 import { Access } from "../support/actions/access"
 import { Notification } from "../support/actions/components/notification"
+import { Home } from "../support/actions/home"
+import { Admin } from "../support/actions/admin"
 
 describe('Dado que estou na página de login', () => {
 
@@ -27,11 +29,11 @@ describe('Dado que estou na página de login', () => {
       Access.fillLoginForm(user)
       Access.submitLoginForm()
 
-      cy.get('section[class="row espacamento"]').should('be.visible')
+      Home.shouldBeVisible()
 
     })
 
-    it('Então deve ser possível realizar LOGIN como Adminisrtador', () => {
+    it.only('Então deve ser possível realizar LOGIN como Adminisrtador', () => {
 
       const user = {
         name: 'Douglas QA Admin',
@@ -47,8 +49,7 @@ describe('Dado que estou na página de login', () => {
       Access.fillLoginForm(user)
       Access.submitLoginForm()
 
-      cy.get('h1').should('to.contain', 'Bem Vindo')
-      cy.get('h1').should('to.contain', user.name)
+      Admin.welcomeShouldBe('Bem Vindo', user.name)
 
     })
 
