@@ -33,7 +33,7 @@ describe('Dado que estou na página de login', () => {
 
     })
 
-    it.only('Então deve ser possível realizar LOGIN como Adminisrtador', () => {
+    it('Então deve ser possível realizar LOGIN como Adminisrtador', () => {
 
       const user = {
         name: 'Douglas QA Admin',
