@@ -34,7 +34,20 @@ export const Access = {
 
     },
 
-    clearForm: function () {
+    clearLoginForm: function () {
+
+        cy.get('#email')
+            .clear()
+
+        cy.get('#password')
+            .clear()
+
+    },
+
+    clearSignupForm: function () {
+
+        cy.get('#nome')
+            .clear()
 
         cy.get('#email')
             .clear()
