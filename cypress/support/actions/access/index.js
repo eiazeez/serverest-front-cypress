@@ -4,6 +4,10 @@ export const Access = {
 
     go: function () {
         cy.visit('/login')
+        this.loginShouldBeVisible()
+    },
+
+    loginShouldBeVisible: function() {
         cy.get('form[class=form]').should('be.visible')
     },
 

@@ -5,22 +5,26 @@ import { Admin } from "../support/actions/admin"
 
 describe('Dado que estou na página de cadastro', function () {
 
+  beforeEach(function() {
+    cy.fixture('signup/successful').then(function(successful) {
+      this.successful = successful
+    })
+    cy.fixture('signup/invalid').then(function(invalid) {
+      this.invalid = invalid
+    })
+  })
+
   it('Então deve ser possível visualizar o formulário de cadastro', function () {
 
     Access.signupGo()
 
   })
 
-  context('Quando preencho o formulário com dados válidos', () => {
+  context('Quando preencho o formulário com dados válidos', function() {
 
-    it('Então deve ser possível realizar CADASTRO como Usuário', () => {
+    it('Então deve ser possível realizar CADASTRO como Usuário', function() {
 
-      const user = {
-        name: 'LeBron James',
-        email: 'lebron-james-user@qa.com',
-        password: 'isd123',
-        administrator: 'false'
-      }
+      const user = this.successful.user
 
       cy.deleteUserByEmail(user.email)
 
@@ -34,14 +38,9 @@ describe('Dado que estou na página de cadastro', function () {
 
     })
 
-    it('Então deve ser possível realizar CADASTRO como Adminisrtador', () => {
+    it('Então deve ser possível realizar CADASTRO como Administrador', function() {
 
-      const user = {
-        name: 'Stephen Curry',
-        email: 'steph-curry-admin@qa.com',
-        password: 'isd123',
-        administrator: 'true'
-      }
+      const user = this.successful.admin
 
       cy.deleteUserByEmail(user.email)
 
@@ -81,12 +80,7 @@ describe('Dado que estou na página de cadastro', function () {
 
     it.only('Então o sistema deve retornar uma mensagem após enviar form com campos esvaziados', function () {
 
-      const user = {
-        name: 'James Bond',
-        email: 'james-bond-user@qa.com',
-        password: 'isd123',
-        administrator: 'false'
-      }
+      const user = this.invalid.clear
 
       Access.signupGo()
       Access.fillSignupForm(user)
@@ -96,6 +90,30 @@ describe('Dado que estou na página de cadastro', function () {
       Notification.shouldHaveTxt('Nome não pode ficar em branco')
       Notification.shouldHaveTxt('Email não pode ficar em branco')
       Notification.shouldHaveTxt('Password não pode ficar em branco')
+
+    })
+
+    it.only('Então o sistema não deve permitir cadastrar email sem @', function () {
+
+      const user = this.invalid.badEmail
+
+      Access.signupGo()
+      Access.fillSignupForm(user)
+      Access.submitSignupForm()
+      Access.outputShouldBe('Inclua um "@" no endereço de e-mail.')
+
+    })
+
+  })
+
+  context('Quando eu clico no botão "Entrar"', function() {
+
+    it('Então deve ser possível ir para a página de Login', function() {
+
+      Access.signupGo()
+      cy.get('a[data-testid="entrar"]').click()
+
+      Access.loginShouldBeVisible()
 
     })
 

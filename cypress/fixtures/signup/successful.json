@@ -1,0 +1,17 @@
+{
+
+    "user": {
+        "name": "LeBron James",
+        "email": "lebron-james-user@qa.com",
+        "password": "isd123",
+        "administrator": "false"
+      },
+
+    "admin" : {
+        "name": "Stephen Curry",
+        "email": "steph-curry-admin@qa.com",
+        "password": "isd123",
+        "administrator": "true"
+      }
+
+}

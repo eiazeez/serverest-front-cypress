@@ -1,0 +1,17 @@
+{
+
+    "clear": {
+        "name": "James Bond",
+        "email": "james-bond-user@qa.com",
+        "password": "isd123",
+        "administrator": "false"
+      },
+
+    "badEmail" : {
+        "name": "Harry Kane",
+        "email": "harry-kane-invalid.com",
+        "password": "isd123",
+        "administrator": "true"
+      }
+
+}
