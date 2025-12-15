@@ -1,0 +1,24 @@
+{
+
+    "clear": {
+        "name": "Mike Wasalski",
+        "email": "mike-wasalski-user@qa.com",
+        "password": "isd123",
+        "administrator": "false"
+      },
+
+    "unregistered" : {
+        "name": "Bob Esponja",
+        "email": "bob-esponja@unregistered.com",
+        "password": "isd123",
+        "administrator": "true"
+      },
+
+      "badEmail" : {
+        "name": "Patrick Estrela",
+        "email": "patrick-estrela.com",
+        "password": "isd123",
+        "administrator": "true"
+      }
+
+}

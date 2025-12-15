@@ -1,0 +1,17 @@
+{
+
+    "user": {
+        "name": "Erick Lamela",
+        "email": "erick-lamela-user@qa.com",
+        "password": "isd123",
+        "administrator": "false"
+      },
+
+    "admin" : {
+        "name": "Christian Eriksen",
+        "email": "christian-eriksen-admin@qa.com",
+        "password": "isd123",
+        "administrator": "true"
+      }
+
+}

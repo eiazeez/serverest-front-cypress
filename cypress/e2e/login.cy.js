@@ -3,7 +3,16 @@ import { Notification } from "../support/actions/components/notification"
 import { Home } from "../support/actions/home"
 import { Admin } from "../support/actions/admin"
 
-describe('Dado que estou na página de login', () => {
+describe('Dado que estou na página de login', function() {
+
+  beforeEach(function() {
+    cy.fixture('login/successful').then(function(successful) {
+      this.successful = successful
+    })
+    cy.fixture('login/invalid').then(function(invalid) {
+      this.invalid = invalid
+    })
+  })
 
   it('Então deve ser possível visualizar o formulário de login', () => {
 
@@ -11,16 +20,11 @@ describe('Dado que estou na página de login', () => {
 
   })
 
-  context('Quando preencho o formulário com dados válidos', () => {
+  context('Quando preencho o formulário com dados válidos', function() {
 
-    it('Então deve ser possível realizar LOGIN como Usuário', () => {
+    it('Então deve ser possível realizar LOGIN como Usuário', function() {
 
-      const user = {
-        name: 'Douglas QA',
-        email: 'teste-douglas-qa@qa.com',
-        password: 'isd123',
-        administrator: 'false'
-      }
+      const user = this.successful.user
 
       cy.deleteUserByEmail(user.email)
       cy.postUser(user)
@@ -33,14 +37,9 @@ describe('Dado que estou na página de login', () => {
 
     })
 
-    it('Então deve ser possível realizar LOGIN como Adminisrtador', () => {
+    it('Então deve ser possível realizar LOGIN como Adminisrtador', function() {
 
-      const user = {
-        name: 'Douglas QA Admin',
-        email: 'teste-douglas-admin@admin.com',
-        password: 'isd123',
-        administrator: 'true'
-      }
+      const user = this.successful.admin
 
       cy.deleteUserByEmail(user.email)
       cy.postUser(user)
@@ -55,9 +54,9 @@ describe('Dado que estou na página de login', () => {
 
   })
 
-  context('Quando preencho o formulário de forma inválida', () => {
+  context('Quando preencho o formulário de forma inválida', function() {
 
-    it('Então não deve ser possível logar sem preencher os dados', () => {
+    it('Então não deve ser possível logar sem preencher os dados', function(){
 
       Access.go()
       Access.submitLoginForm()
@@ -67,13 +66,13 @@ describe('Dado que estou na página de login', () => {
 
     })
 
-    it('Então o sistema deve retornar que os campos não podem ficar vazios', () => {
+    it('Então o sistema deve retornar que os campos não podem ficar vazios', function() {
 
-      const user = { email:'emailDeTeste@email.com' , password: 'SENHABEMALEATORIA' }
+      const user = this.invalid.clear
 
       Access.go()
       Access.fillLoginForm(user)
-      Access.clearForm()
+      Access.clearLoginForm()
       Access.submitLoginForm()
 
       Notification.shouldHaveTxt('Email não pode ficar em branco')
@@ -81,9 +80,9 @@ describe('Dado que estou na página de login', () => {
 
     })
 
-    it('Então não deve ser possível logar usuário não cadastrado', () => {
+    it('Então não deve ser possível logar usuário não cadastrado', function() {
 
-      const user = { email: 'emailDeTeste@email.com', password: 'SENHABEMALEATORIA' }
+      const user = this.invalid.unregistered
 
       Access.go()
       Access.fillLoginForm(user)
@@ -92,9 +91,9 @@ describe('Dado que estou na página de login', () => {
       Notification.shouldHaveTxt('Email e/ou senha inválidos')
     })
 
-    it('Então não deve ser possível logar com email inválido', () => {
+    it.only('Então não deve ser possível logar com email inválido', function() {
 
-      const user = { email: 'emailDeTesteemail.com', password: 'SENHABEMALEATORIA' }
+      const user = this.invalid.badEmail
 
       Access.go()
       Access.fillLoginForm(user)
