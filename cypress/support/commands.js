@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('getUserByEmail', (email) => { 
+Cypress.Commands.add('getUserByEmail', (email) => {
     cy.api({
         url: `${Cypress.env('apiUrl')}/usuarios`,
         method: 'GET',
@@ -49,17 +49,28 @@ Cypress.Commands.add('deleteUserByEmail', (email) => {
     })
 })
 
-Cypress.Commands.add('postUser', (user) => { 
+Cypress.Commands.add('postUser', (user) => {
     cy.api({
         url: `${Cypress.env('apiUrl')}/usuarios`,
         method: 'POST',
         body: {
-              "nome": user.name,
-              "email": user.email,
-              "password": user.password,
-              "administrador": user.administrator
-            }
-      })
+            "nome": user.name,
+            "email": user.email,
+            "password": user.password,
+            "administrador": user.administrator
+        }
+    })
+})
+
+Cypress.Commands.add('apiLogin', function (user) {
+    cy.api({
+        url: `${Cypress.env('apiUrl')}/login`,
+        method: 'POST',
+        body: {
+            "email": user.email,
+            "password": user.password
+        }
+    })
 })
 
 
