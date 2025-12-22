@@ -91,7 +91,7 @@ describe('Dado que estou na página de login', function() {
       Notification.shouldHaveTxt('Email e/ou senha inválidos')
     })
 
-    it.only('Então não deve ser possível logar com email inválido', function() {
+    it('Então não deve ser possível logar com email inválido', function() {
 
       const user = this.invalid.badEmail
 
