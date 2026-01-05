@@ -6,6 +6,10 @@ describe('Dado que estou na página de Minha Lista de Compras', function () {
         cy.fixture('login/successful').then(function (successful) {
             this.successful = successful
         })
+
+        cy.fixture('products/tech').then(function (tech) {
+            this.tech = tech
+        })
     })
 
     it('Então deve ser possível visualizar o texto "Lista de Compras"', function () {
@@ -20,8 +24,8 @@ describe('Dado que estou na página de Minha Lista de Compras', function () {
 
     })
 
-    it.only('Então deve ser possível retornar a Home através do botão "Página Inicial"', function() {
-       const user = this.successful.user
+    it('Então deve ser possível retornar a Home através do botão "Página Inicial"', function () {
+        const user = this.successful.user
 
         cy.deleteUserByEmail(user.email)
         cy.postUser(user)
@@ -41,6 +45,23 @@ describe('Dado que estou na página de Minha Lista de Compras', function () {
 
             List.go(user)
             List.emptyShouldHave('Seu carrinho está vazio')
+
+        })
+
+    })
+
+    context.only('Quando possuo produto na Lista de Compras', function () {
+
+        it('Então deve ser possível limpar a lista', function () {
+
+            const admin = this.successful.admin
+            cy.deleteUserByEmail(admin.email)
+            cy.postUser(admin)
+
+            const product = this.tech.mouse
+
+            cy.deleteProductByName(admin, product.nome)
+            cy.postProduct(admin, product)
 
         })
 

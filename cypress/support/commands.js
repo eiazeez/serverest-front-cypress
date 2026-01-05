@@ -73,5 +73,52 @@ Cypress.Commands.add('apiLogin', function (user) {
     })
 })
 
+Cypress.Commands.add('postProduct', function (admin, product) {
+
+    cy.apiLogin(admin).then(function (response) {
+        cy.api({
+            url: `${Cypress.env('apiUrl')}/produtos`,
+            method: 'POST',
+            headers: { authorization: response.body.authorization },
+            body: {
+                "nome": product.nome,
+                "preco": product.preco,
+                "descricao": product.descricao,
+                "quantidade": product.quantidade
+            }
+        })
+    })
+})
+
+Cypress.Commands.add('getProductByName', function (name) {
+    cy.api({
+        url: `${Cypress.env('apiUrl')}/produtos`,
+        method: 'GET'
+    }).then(response => {
+
+        const products = response.body.produtos || response.body
+        expect(Array.isArray(products)).to.be.true
+
+        const product = products.find(p => p.nome === name)
+        return product
+    })
+})
+
+Cypress.Commands.add('deleteProductByName', function (admin, name) {
+
+    cy.getProductByName(name).then(product => {
+        expect(product).to.not.be.undefined
+        const productId = product._id
+
+        cy.apiLogin(admin).then(function (response) {
+            cy.api({
+                url: `${Cypress.env('apiUrl')}/produtos/${productId}`,
+                method: 'DELETE',
+                headers: { authorization: response.body.authorization },
+            })
+        })
+    })
+})
+
 
 

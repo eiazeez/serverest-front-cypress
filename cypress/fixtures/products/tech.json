@@ -1,0 +1,23 @@
+{
+  "mouse": {
+    "nome": "Mouse Gamer HyperX",
+    "preco": 199,
+    "descricao": "Mouse gamer com sensor de alta precisão e iluminação RGB.",
+    "quantidade": 50
+  },
+
+  "teclado": {
+    "nome": "Teclado Mecânico Redragon",
+    "preco": 349,
+    "descricao": "Teclado mecânico RGB com switches Blue para maior precisão.",
+    "quantidade": 30,
+    "image": "teclado.jpg"
+  },
+
+  "monitor": {
+    "nome": "Monitor 27'' 144Hz Samsung",
+    "preco": 1299,
+    "descricao": "Monitor de 27 polegadas com taxa de atualização de 144Hz e painel IPS.",
+    "quantidade": 15
+  }
+}
