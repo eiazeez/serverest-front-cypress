@@ -3,7 +3,8 @@
     "nome": "Mouse Gamer HyperX",
     "preco": 199,
     "descricao": "Mouse gamer com sensor de alta precisão e iluminação RGB.",
-    "quantidade": 50
+    "quantidade": 50,
+    "amount": 3
   },
 
   "teclado": {

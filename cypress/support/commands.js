@@ -114,9 +114,26 @@ Cypress.Commands.add('deleteProductByName', function (admin, name) {
             cy.api({
                 url: `${Cypress.env('apiUrl')}/produtos/${productId}`,
                 method: 'DELETE',
+                failOnStatusCode: false,
                 headers: { authorization: response.body.authorization },
             })
         })
+    })
+})
+
+Cypress.Commands.add('adjustUserData', function(user) {
+    cy.deleteUserByEmail(user.email)
+    cy.postUser(user)
+})
+
+Cypress.Commands.add('addProductToList', function(admin, product) {
+    cy.deleteProductByName(admin, product.nome)
+    cy.postProduct(admin, product)
+    cy.getProductByName(product.nome).then(function(info){
+        expect(product).to.not.be.undefined
+        const productId = info._id
+
+        window.localStorage.setItem('products', `[{"_id":"${productId}","nome":"${product.nome}","preco":${product.preco},"quantidade":${product.quantidade},"descricao":"${product.descricao}","amount":${product.amount}}]`)
     })
 })
 

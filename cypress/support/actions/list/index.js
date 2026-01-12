@@ -30,6 +30,10 @@ export const List = {
     goToHome: function() {
         cy.get('button[data-testid="paginaInicial"]').click()
         Home.shouldBeVisible()
+    },
+
+    clear: function() {
+        cy.get('button[data-testid="limparLista"]').click()
     }
 
 }

@@ -54,14 +54,18 @@ describe('Dado que estou na página de Minha Lista de Compras', function () {
 
         it('Então deve ser possível limpar a lista', function () {
 
+            const user = this.successful.user
             const admin = this.successful.admin
-            cy.deleteUserByEmail(admin.email)
-            cy.postUser(admin)
+            cy.adjustUserData(user)
+            cy.adjustUserData(admin)
 
             const product = this.tech.mouse
+            cy.addProductToList(admin, product)
 
-            cy.deleteProductByName(admin, product.nome)
-            cy.postProduct(admin, product)
+            List.go(user)
+
+            List.clear()
+            List.emptyShouldHave('Seu carrinho está vazio')
 
         })
 
