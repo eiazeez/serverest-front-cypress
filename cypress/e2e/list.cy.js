@@ -50,7 +50,7 @@ describe('Dado que estou na página de Minha Lista de Compras', function () {
 
     })
 
-    context.only('Quando possuo produto na Lista de Compras', function () {
+    context('Quando possuo produto na Lista de Compras', function () {
 
         it('Então deve ser possível limpar a lista', function () {
 

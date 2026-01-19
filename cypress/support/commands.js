@@ -126,6 +126,11 @@ Cypress.Commands.add('adjustUserData', function(user) {
     cy.postUser(user)
 })
 
+Cypress.Commands.add('adjustProductData', function(admin, product) {
+    cy.deleteProductByName(admin, product.nome)
+    cy.postProduct(admin, product)
+})
+
 Cypress.Commands.add('addProductToList', function(admin, product) {
     cy.deleteProductByName(admin, product.nome)
     cy.postProduct(admin, product)

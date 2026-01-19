@@ -34,6 +34,11 @@ export const List = {
 
     clear: function() {
         cy.get('button[data-testid="limparLista"]').click()
+    },
+
+    shouldHaveProduct: function(name) {
+        cy.get('div[data-testid="shopping-cart-product-name"]')
+                .should('to.contain', name)
     }
 
 }
