@@ -28,6 +28,11 @@ export const Home = {
 
     addToList: function () {
         cy.get('button[data-testid="adicionarNaLista"]').click()
+    },
+
+    emptyMsgShouldBe: function(msg) {
+        cy.get('.container-fluid p')
+                .should('have.text', msg)
     }
 
 }

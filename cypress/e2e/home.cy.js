@@ -47,6 +47,22 @@ describe('Dado que estou na página Home', function () {
             List.shouldHaveProduct(product.nome)
 
         })
+    })
+
+    context('Quando pesquiso um produto inválido', function() {
+
+        it('Então deve me retornar', function() {
+
+            const product = { nome: 'Produto Inválido' }
+
+            const user = this.successful.user
+            cy.adjustUserData(user)
+
+            Home.go(user)
+            Home.searchProduct(product.nome)  
+            
+            Home.emptyMsgShouldBe('Nenhum produto foi encontrado')
+        })
 
     })
 })
