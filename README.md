@@ -8,7 +8,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 -->
 <div align="center">
 
-  <img src="image/serverest-logo.png" alt="drawing" style="width:300px;"/>
+  <img src="images/serverest-logo.png" alt="drawing" style="width:300px;"/>
   <h1>Serverest - Cypress Automation [Isaac Douglas] :rocket:</h1>
 
   <p>
@@ -52,7 +52,7 @@ Maybe you can mention me or this repo in the acknowledgements too
  
 
 <div align="center"> 
-  <img src="image/timelapse.gif" width="800" height="auto" alt="screenshot" />
+  <img src="images/timelapse.gif" width="800" height="auto" alt="screenshot" />
 </div>
 
 
@@ -130,7 +130,7 @@ Para rodar em headless, pode utilizar o comando abaixo
 Os testes foram escritos seguindo o padrão Mocha de escrita
 
 <div align="center"> 
-  <img src="image/code.png" width="800" height="auto" alt="screenshot" />
+  <img src="images/code.png" width="800" height="auto" alt="screenshot" />
 </div>
 
 Portanto, os testes ficam fácil de visualizar, como no exemplo abaixo:
