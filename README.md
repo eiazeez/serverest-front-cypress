@@ -64,8 +64,6 @@ Maybe you can mention me or this repo in the acknowledgements too
 ### 🛠️ Dev Dependencies
 > ![Static Badge](https://img.shields.io/badge/2.11.2-fe6b5c?style=for-the-badge&logo=cloudfoundry&logoColor=%23ffffff&label=CYPRESS-PLUGIN-API&labelColor=orange)
 
-> ![Static Badge](https://img.shields.io/badge/build-1.4.1-blue?style=for-the-badge&logo=simpleanalytics&logoColor=white&label=CY-TESULTS-REPORTER&labelColor=8833d8&color=606a92)
-
 <!-- Roadmap -->
 ## 📄 Páginas testadas
 
